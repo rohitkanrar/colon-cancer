@@ -11,9 +11,9 @@ n_pair <- 15
 # frequency (balanced per type)
 share_pairs <- matrix(0, m, m)
 repl <- ceiling(n_pair * n / n_total_pairs)
-share_pairs[upper.tri(share_pairs)] <- sample(rep(repl, n_total_pairs), 
-                                              n_total_pairs)
+share_pairs <- rep(repl, n_total_pairs)
 effect_pairs <- share_pairs 
+
 
 # placing all pairs in an upper triangular array
 all_pairs <- matrix(0, m, m)
@@ -45,7 +45,7 @@ for(p in 1:n_pair){
     pair_ <- sample(avl_pairs_, 1)
     ind_ <- pair_to_array(pair_)
     n_filled_ <- length(msg_asgnd_effect[[i]])
-    effect_count_ <- effect_pairs[ind_[1], ind_[2]]
+    effect_count_ <- effect_pairs[pair_]
     is_ok_ <- FALSE
     
     if(effect_count_ > 0){
@@ -56,12 +56,11 @@ for(p in 1:n_pair){
       else{
         is_ok_ <- check_unique(output[[i]], ind_)
         if(is_ok_){
-          filled_ <- length(msg_asgnd_effect[[i]])
           output[[i]][n_filled_/2+1, ] <- ind_
         }
       }
       if(is_ok_){
-        effect_pairs[ind_[1], ind_[2]] <- effect_count_ - 1
+        effect_pairs[pair_] <- effect_count_ - 1
         msg_asgnd_effect[[i]] <- c(msg_asgnd_effect[[i]], ind_)
       }
     }
@@ -78,7 +77,7 @@ for(p in 1:n_pair){
     pair_ <- sample(avl_pairs_, 1)
     ind_ <- pair_to_array(pair_)
     n_filled_ <- length(msg_asgnd_share[[i]])
-    share_count_ <- share_pairs[ind_[1], ind_[2]]
+    share_count_ <- share_pairs[pair_]
     is_ok_ <- FALSE
     
     if(share_count_ > 0){
@@ -89,12 +88,11 @@ for(p in 1:n_pair){
       else{
         is_ok_ <- check_unique(output[[i]], ind_)
         if(is_ok_){
-          filled_ <- length(msg_asgnd_share[[i]])
           output[[i]][n_pair+n_filled_/2+1, ] <- ind_
         }
       }
       if(is_ok_){
-        share_pairs[ind_[1], ind_[2]] <- share_count_ - 1
+        share_pairs[pair_] <- share_count_ - 1
         msg_asgnd_share[[i]] <- c(msg_asgnd_share[[i]], ind_)
       }
       
