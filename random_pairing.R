@@ -1,14 +1,16 @@
 # setwd("Research/RA/colon-cancer/")
-source("func.R")
-source("initial_pairing.R")
+source("Research/RA/colon-cancer/func.R")
+source("Research/RA/colon-cancer/initial_pairing.R")
 
 
 # expecting "output", "msg_asgnd_effect" and "msg_asgnd_share" objects
-
-while((sum(share_pairs) > 168) || (sum(effect_pairs) > 168)){
-  # print(sum(share_pairs))
-  # print(sum(effect_pairs))
-  pair_ <- sample(1:n_total_pairs, 1)
+diff <- sum(rep(repl, n_total_pairs)) - n * n_pair
+while((sum(share_pairs) > diff) || (sum(effect_pairs) > diff)){
+  print(sum(share_pairs))
+  print(sum(effect_pairs))
+  pair_ <- sample(1:n_total_pairs, 1, 
+                  prob = (share_pairs + effect_pairs) / 
+                    sum((share_pairs + effect_pairs)))
   ind_ <- pair_to_array(pair_)
   effect_count_ <- effect_pairs[pair_]
   share_count_ <- share_pairs[pair_]
@@ -45,11 +47,59 @@ while((sum(share_pairs) > 168) || (sum(effect_pairs) > 168)){
   }
 }
 
+
 is_unique <- 0
 for(i in 1:n){
   a <- 0
   a <- sum(duplicated(as.numeric(output[[i]])))
-  if(a == 1)
+  if(a > 0)
+    print(i)
+  is_unique <- is_unique + a
+}
+
+
+
+# for(p in which(share_pairs == repl - 1)){
+#   ind_ <- pair_to_array(p)
+#   for(i in 1:n){
+#     if(check_unique(output[[i]], ind_)){
+#       for(j in 1:n_pair){
+#         ind1_ <- as.numeric(output[[i]][j, ])
+#         p_ <- array_to_pair(ind1_[1], ind1_[2])
+#         if(share_pairs[p_] == 0){
+#           output[[i]][j, ] <- ind_
+#           share_pairs[p_] <- 1
+#           share_pairs[p] <- share_pairs[p_] - 1
+#         }
+#       }
+#     }
+#   }
+# }
+# 
+# 
+# for(p in which(effect_pairs == repl - 1)){
+#   ind_ <- pair_to_array(p)
+#   for(i in 1:n){
+#     if(check_unique(output[[i]], ind_)){
+#       for(j in (n_pair+1):(2*n_pair)){
+#         ind1_ <- as.numeric(output[[i]][j, ])
+#         p_ <- array_to_pair(ind1_[1], ind1_[2])
+#         if(effect_pairs[p_] == 0){
+#           output[[i]][j, ] <- ind_
+#           effect_pairs[p_] <- 1
+#           effect_pairs[p] <- effect_pairs[p_] - 1
+#         }
+#       }
+#     }
+#   }
+# }
+
+
+is_unique <- 0
+for(i in 1:n){
+  a <- 0
+  a <- sum(duplicated(as.numeric(output[[i]])))
+  if(a > 0)
     print(i)
   is_unique <- is_unique + a
 }

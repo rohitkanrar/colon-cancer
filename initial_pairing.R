@@ -81,7 +81,7 @@ for(p in 1:n_pair){
     is_ok_ <- FALSE
     
     if(share_count_ > 0){
-      if(n_filled_ == 0){
+      if(n_filled_ == 0 && length(msg_asgnd_effect[[i]]) == 0){
         is_ok_ <- TRUE
         output[[i]][n_pair+1, ] <- ind_
       }
@@ -98,6 +98,5 @@ for(p in 1:n_pair){
       
     }
     # else continue
-    
   }
 }
