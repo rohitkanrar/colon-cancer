@@ -13,3 +13,15 @@ array_to_pair <- function(i, j) i + (j - 1) * (j - 2) / 2
 pair_to_array <- function(pair) as.numeric(which(all_pairs == pair, arr.ind = T))
 
 
+check_exchange <- function(pairs, new_pair){
+  k <- 0
+  for(i in 1:nrow(pairs)){
+    k <- k + as.numeric(check_unique(pairs[-i, ], new_pair))
+    if(k > 0)
+      break
+  }
+  if(k > 0)
+    return(FALSE)
+  else
+    return(TRUE)
+}
