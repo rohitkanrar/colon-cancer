@@ -4,7 +4,8 @@ for(p in which(effect_pairs == (repl - 1))){
   ind_ <- pair_to_array(p)
   status <- FALSE
   i <- 1
-  while(!status && (i <= n_pair)){
+  while(!status && (i <= n)){
+    # print(i)
     if(check_unique(output[[i]], ind_)){
       j <- 1
       while(!status && (j <= n_pair)){
@@ -28,7 +29,8 @@ for(p in which(share_pairs == (repl - 1))){
   ind_ <- pair_to_array(p)
   status <- FALSE
   i <- 1
-  while(!status && (i <= n_pair)){
+  while(!status && (i <= n)){
+    # print(i)
     if(check_unique(output[[i]], ind_)){
       j <- 1
       while(!status && (j <= n_pair)){
