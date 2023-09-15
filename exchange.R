@@ -30,15 +30,15 @@ for(p in which(share_pairs == (repl - 1))){
   status <- FALSE
   i <- 1
   while(!status && (i <= n)){
-    # print(i)
+    print(i)
     if(check_unique(output[[i]], ind_)){
       j <- 1
       while(!status && (j <= n_pair)){
-        ind1_ <- as.numeric(output[[i]][j, ])
+        ind1_ <- as.numeric(output[[i]][(j+n_pair), ])
         p_ <- array_to_pair(ind1_[1], ind1_[2])
         if(share_pairs[p_] < (repl - 2)){
           status <- TRUE
-          output[[i]][j, ] <- ind_
+          output[[i]][(j+n_pair), ] <- ind_
           share_pairs[p_] <- share_pairs[p_] + 1
           share_pairs[p] <- share_pairs[p] - 1
         }
