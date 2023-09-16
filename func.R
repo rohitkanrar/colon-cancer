@@ -34,3 +34,16 @@ mat_to_vec <- function(pairs){
   }
   vec_
 }
+
+shuffle_pairs <- function(output){
+  n <- length(output)
+  n_pair <- nrow(output[[1]]) / 2
+  ind <- sample(1:n, n, replace = FALSE)
+  output <- output[ind]
+  for(i in 1:n){
+    ind_ <- c(sample(1:n_pair, n_pair, replace = FALSE), 
+              sample((n_pair+1):(2*n_pair), n_pair, replace = FALSE))
+    output[[i]] <- output[[i]][ind_, ]
+  }
+  return(output)
+}

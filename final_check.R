@@ -1,5 +1,6 @@
-final_pairs <-readRDS("Research/RA/colon-cancer/pair_assignment_final_after_check.rds")
-# final_pairs <- output
+# final_pairs <-readRDS("Research/RA/colon-cancer/pair_assignment_final_after_check.rds")
+library(plyr)
+final_pairs <- shuffle_pairs(output)
 effect_final_freq <- numeric(n_total_pairs)
 share_final_freq <- numeric(n_total_pairs)
 
@@ -21,5 +22,5 @@ for(i in 1:n){
 
 count(effect_final_freq)
 count(share_final_freq)
-# saveRDS(final_pairs, 
-#         "Research/RA/colon-cancer/pair_assignment_final_after_check.rds")
+# saveRDS(final_pairs,
+#         "Research/RA/colon-cancer/pair_assignment_final_after_check_second.rds")
