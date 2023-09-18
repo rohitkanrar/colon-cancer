@@ -1,6 +1,7 @@
 #browser()
+# Run it twice
 
-for(p in which(effect_pairs == (repl - 1))){
+for(p in which(effect_pairs >= (repl - 1))){
   ind_ <- pair_to_array(p)
   status <- FALSE
   i <- 1
@@ -17,20 +18,20 @@ for(p in which(effect_pairs == (repl - 1))){
           effect_pairs[p_] <- effect_pairs[p_] + 1
           effect_pairs[p] <- effect_pairs[p] - 1
         }
+        j <- j + 1
       }
-      j <- j + 1
     }
     i <- i + 1
   }
 }
 
 
-for(p in which(share_pairs == (repl - 1))){
+for(p in which(share_pairs >= (repl - 1))){
   ind_ <- pair_to_array(p)
   status <- FALSE
   i <- 1
   while(!status && (i <= n)){
-    print(i)
+    # print(i)
     if(check_unique(output[[i]], ind_)){
       j <- 1
       while(!status && (j <= n_pair)){
@@ -42,8 +43,8 @@ for(p in which(share_pairs == (repl - 1))){
           share_pairs[p_] <- share_pairs[p_] + 1
           share_pairs[p] <- share_pairs[p] - 1
         }
+        j <- j + 1
       }
-      j <- j + 1
     }
     i <- i + 1
   }
