@@ -26,11 +26,16 @@ pair_to_array <- function(pair) as.numeric(which(all_pairs == pair, arr.ind = T)
 #     return(TRUE)
 # }
 
-mat_to_vec <- function(pairs){
+mat_to_vec <- function(pairs, randomize = FALSE){
   n_row_ <- nrow(pairs)
   vec_ <- numeric(0)
   for(i in 1:n_row_){
-    vec_ <- c(vec_, pairs[i, ])
+    if(randomize){
+      vec_ <- c(vec_, pairs[i, sample(1:2, 2)])
+    }
+    else{
+      vec_ <- c(vec_, pairs[i, ])
+    }
   }
   vec_
 }
