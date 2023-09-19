@@ -48,6 +48,20 @@ shuffle_pairs <- function(output){
   return(output)
 }
 
+shuffle_messages <- function(assigned_pairs, m){
+  messages_ <- sample(1:m, m)
+  n <- length(assigned_pairs)
+  n_pair <- nrow(assigned_pairs[[1]]) / 2
+  for(i in 1:n){
+    for(j in 1:(2*n_pair)){
+      ind_ <- assigned_pairs[[i]][j, ]
+      assigned_pairs[[i]][j, ] <- sort(c(messages_[ind_[1]], 
+                                         messages_[ind_[2]]))
+    }
+  }
+  return(assigned_pairs)
+}
+
 library(plyr)
 
 get_freq_of_messages <- function(output){

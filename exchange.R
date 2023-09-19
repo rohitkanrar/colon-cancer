@@ -60,3 +60,6 @@ for(i in 1:n){
     print(i)
   is_unique <- is_unique + a
 }
+
+print(which(effect_pairs > 1))
+print(which(share_pairs > 1))
