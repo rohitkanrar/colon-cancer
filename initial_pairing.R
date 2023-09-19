@@ -1,5 +1,5 @@
 # no of messages
-m <- 72 
+m <- 68
 # total number of pairs
 n_total_pairs <- choose(m, 2)
 # no of participants (in each group)
@@ -9,10 +9,11 @@ n_pair <- 15
 
 
 # frequency (balanced per type)
-share_pairs <- matrix(0, m, m)
 repl <- ceiling(n_pair * n / n_total_pairs)
-share_pairs <- rep(repl, n_total_pairs)
+share_pairs <- rep((repl-1), n_total_pairs)
 effect_pairs <- share_pairs 
+share_messages <- rep((repl - 1) * (m-1), m)
+effect_messages <- share_messages
 
 
 # placing all pairs in an upper triangular array
@@ -49,7 +50,7 @@ for(p in 1:n_pair){
     is_ok_ <- FALSE
     
     if(effect_count_ > 0){
-      if(n_filled_ == 0){
+      if(n_filled_ == 0 && length(msg_asgnd_share[[i]]) == 0){
         is_ok_ <- TRUE
         output[[i]][1, ] <- ind_
       }
@@ -62,6 +63,8 @@ for(p in 1:n_pair){
       if(is_ok_){
         effect_pairs[pair_] <- effect_count_ - 1
         msg_asgnd_effect[[i]] <- c(msg_asgnd_effect[[i]], ind_)
+        effect_messages[ind_[1]] <- effect_messages[ind_[1]] - 1
+        effect_messages[ind_[2]] <- effect_messages[ind_[2]] - 1
       }
     }
     # else continue
@@ -94,6 +97,8 @@ for(p in 1:n_pair){
       if(is_ok_){
         share_pairs[pair_] <- share_count_ - 1
         msg_asgnd_share[[i]] <- c(msg_asgnd_share[[i]], ind_)
+        share_messages[ind_[1]] <- share_messages[ind_[1]] - 1
+        share_messages[ind_[2]] <- share_messages[ind_[2]] - 1
       }
       
     }

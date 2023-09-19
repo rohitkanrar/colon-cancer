@@ -1,8 +1,9 @@
 source("Research/RA/colon-cancer/func.R")
-final_pairs <-readRDS("Research/RA/colon-cancer/pair_assignment_balanced_after_check_second.rds")
+# final_pairs <-readRDS("Research/RA/colon-cancer/pair_assignment_balanced_after_check_second.rds")
 library(plyr)
-# final_pairs <- shuffle_pairs(output)
-n_total_pairs <- choose(72, 2)
+final_pairs <- shuffle_pairs(output)
+final_pairs <- output
+n_total_pairs <- choose(m, 2)
 n <- length(final_pairs)
 n_pair <- nrow(final_pairs[[1]]) / 2
 effect_final_freq <- numeric(n_total_pairs)
@@ -26,5 +27,5 @@ for(i in 1:n){
 
 print(count(effect_final_freq))
 print(count(share_final_freq))
-# saveRDS(final_pairs,
-#         "Research/RA/colon-cancer/pair_assignment_balanced_after_check_second.rds")
+saveRDS(final_pairs,
+        "Research/RA/colon-cancer/pair_assignment_68_balanced_after_check_second.rds")
