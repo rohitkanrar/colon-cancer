@@ -1,7 +1,7 @@
 #browser()
 # Run it twice
 
-for(p in which(effect_pairs >= (repl - 2))){
+for(p in which(effect_pairs >= 2)){
   ind_ <- pair_to_array(p)
   status <- FALSE
   i <- 1
@@ -26,7 +26,7 @@ for(p in which(effect_pairs >= (repl - 2))){
 }
 
 
-for(p in which(share_pairs >= (repl - 2))){
+for(p in which(share_pairs >= 2)){
   ind_ <- pair_to_array(p)
   status <- FALSE
   i <- 1

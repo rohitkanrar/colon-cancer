@@ -93,3 +93,4 @@ get_dist_of_pairs <- function(messages_count){
   prob_pairs <- prob_pairs / sum(prob_pairs)
   return(prob_pairs)
 }
+
