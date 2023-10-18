@@ -27,5 +27,5 @@ for(i in 1:n){
 
 print(count(effect_final_freq))
 print(count(share_final_freq))
-saveRDS(final_pairs,
-        "Research/RA/colon-cancer/pair_assignment_big_68_balanced_after_check_second.rds")
+# saveRDS(final_pairs,
+#         "Research/RA/colon-cancer/pair_assignment_big_68_balanced_after_check_second.rds")

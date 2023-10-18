@@ -3,7 +3,7 @@ m <- 68
 # total number of pairs
 n_total_pairs <- choose(m, 2)
 # no of participants (in each group)
-n <- 500
+n <- 700
 # no of pairs each participants will see (type: effect and share separately)
 n_pair <- 15
 
