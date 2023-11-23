@@ -2,19 +2,19 @@ library(R2jags)
 bt.mod <- function(){
   # Priors
   for(m in 1:(M-1)){
-    theta_[m] ~ dnorm(0, 1)
-    delta_[m] ~ dnorm(0, 1)
+    theta_[m] ~ dt(0, 1, 1)
+    delta_[m] ~ dt(0, 1, 1)
   }
   theta <- c(theta_, -sum(theta_))
   delta <- c(delta_, -sum(delta_))
-  mu_ ~ dnorm(0, 1)
+  mu_ ~ dt(0, 1, 1)
   mu <- c(mu_, -mu_)
   tau_ ~ dgamma(0.01, 0.01)
   for(k in 1:(N-1)){
     gamma_[k] ~ dnorm(0, tau_)
   }
   gamma <- c(gamma_, -sum(gamma_))
-  # Probabilities
+  # Likelihood
   for(r in 1:2){
     for(k in 1:N){
       for(l in 1:L){
@@ -47,3 +47,4 @@ print(bt.mod.fit)
 pdf("Research/RA/colon-cancer/project/toy_mcmc.pdf")
 plot(bt.mcmc)
 dev.off()
+bt.summary <- summary(bt.mcmc)
