@@ -1,11 +1,12 @@
 #############################################################
 #################### TIME INTENSIVE COMPUTATION #############
 #############################################################
+setwd("~/Research/RA/colon-cancer/project/") # change work dir accordingly
 
 library(nimble, warn.conflicts = FALSE)
 set.seed(100)
-source("~/Research/RA/colon-cancer/project/generate_data.R")
-source("~/Research/RA/colon-cancer/project/model_matrix.R")
+source("generate_data.R")
+source("model_matrix.R")
 
 mod_bnp <- nimbleCode({
   for(t in 1:total){
@@ -52,4 +53,4 @@ mcmc_bnp <- nimbleMCMC(code = mod_bnp, inits = inits,
                       thin = 10, niter = 35000, nburnin = 5000, nchains = 3, 
                       setSeed = TRUE)
 
-saveRDS(mcmc_bnp, "~/Research/RA/colon-cancer/project/mcmc_bnp.RData")
+saveRDS(mcmc_bnp, "output/mcmc_bnp.RData")

@@ -1,9 +1,11 @@
 #############################################################
-#################### TIME INTENSIVE COMPUTATION #############
+#################### NOT TIME INTENSIVE #####################
 #############################################################
 
-mcmc_bayes <- readRDS("~/Research/RA/colon-cancer/project/mcmc_bayes.RData")
-mcmc_bnp <- readRDS("~/Research/RA/colon-cancer/project/mcmc_bnp.RData")
+setwd("~/Research/RA/colon-cancer/project/") # change work dir accordingly
+
+mcmc_bayes <- readRDS("output/mcmc_bayes.RData")
+mcmc_bnp <- readRDS("output/mcmc_bnp.RData")
 
 library(MCMCvis)
 
@@ -49,13 +51,14 @@ MCMCtrace(object = mcmc_bayes,
           pdf = TRUE, # no export to PDF
           ind = TRUE, # separate density lines per chain
           params = 'theta',
-          filename = "/Research/RA/colon-cancer/project/bayes_trace.pdf",
-          Rhat = T, )
+          filename = "output/bayes_trace.pdf",
+          Rhat = T)
 
 MCMCtrace(object = mcmc_bnp,
-          pdf = FALSE, # no export to PDF
+          pdf = TRUE, # no export to PDF
           ind = TRUE, # separate density lines per chain
-          params = "theta")
+          params = "theta",
+          Rhat = T, filename = "output/bnp_trace.pdf")
 
 # order(theta[1:11])
 # rownames(summary_bayes)[114:124][order(summary_bayes[114:124, 1])]
