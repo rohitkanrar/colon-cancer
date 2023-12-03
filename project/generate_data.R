@@ -1,5 +1,4 @@
-set.seed(9167616)
-M <- 10 # no of messages
+M <- 12 # no of messages
 L <- 5 # no of questions per participants
 N <- 50 # no of white participants
 
@@ -17,11 +16,16 @@ for(i in 1:N){
 }
 
 # Parameter Initialization
-theta <- rnorm(M-1)
-theta <- c(theta, -sum(theta))
-delta <- matrix(rnorm(M-1), 1, M-1)
-delta <- rbind(delta, -delta)
-delta <- cbind(delta, c(-sum(delta[1, ]), -sum(delta[2, ])))
+th_mu <- c(-4, 0.01, 10)
+theta <- numeric(M)
+for(i in 1:(M-1)){
+  cl <- sample(1:length(th_mu), 1)
+  theta[i] <- rnorm(1, th_mu[cl], 0.1)
+}
+theta[M] <- -sum(theta)
+
+delta <- matrix(rnorm(2*(M-1)), 2, M-1)
+delta <- cbind(delta, apply(delta, 1, sum))
 mu <- rnorm(1)
 mu <- c(mu, -mu)
 gamma <- matrix(rnorm(N-1), 1, N-1)
